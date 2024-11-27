@@ -19,8 +19,10 @@ const handleSubmit = require('./script');
 test('function is triggered on form submission', () => {
   const eventSignupForm = document.getElementById('eventSignupForm');
   const submitSpy = jest.spyOn(eventSignupForm, 'addEventListener');
-  
-  handleSubmit(); // Call the event listener setup
+
+  // Attach the event listener
+  eventSignupForm.addEventListener('submit', handleSubmit);
+
   expect(submitSpy).toHaveBeenCalledWith('submit', expect.any(Function));
 });
 
@@ -32,7 +34,7 @@ test('validates required fields', () => {
 
   const alertSpy = jest.spyOn(window, 'alert').mockImplementation(() => {});
   document.getElementById('eventSignupForm').dispatchEvent(new Event('submit'));
-  
+
   expect(alertSpy).toHaveBeenCalledWith('All fields are required.');
 });
 
@@ -44,7 +46,7 @@ test('validates email format', () => {
 
   const alertSpy = jest.spyOn(window, 'alert').mockImplementation(() => {});
   document.getElementById('eventSignupForm').dispatchEvent(new Event('submit'));
-  
+
   expect(alertSpy).toHaveBeenCalledWith('Please enter a valid email address.');
 });
 

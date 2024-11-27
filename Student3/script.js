@@ -1,6 +1,8 @@
 // JavaScript for handling form submission and validation
-document.getElementById('eventSignupForm').addEventListener('submit', function (event) {
-    event.preventDefault();
+function handleSubmit(event) {
+    if (event) {
+      event.preventDefault();
+    }
   
     // Collect form data
     const eventName = document.getElementById('eventName').value.trim();
@@ -30,5 +32,16 @@ document.getElementById('eventSignupForm').addEventListener('submit', function (
   
     console.log('Form Submitted:', formData);
     alert('Signup Successful!');
-  });
+  }
+  
+  // Attach the event listener in the browser environment
+  if (typeof document !== 'undefined') {
+    const form = document.getElementById('eventSignupForm');
+    if (form) {
+      form.addEventListener('submit', handleSubmit);
+    }
+  }
+  
+  // Export the function for testing purposes
+  module.exports = handleSubmit;
   
