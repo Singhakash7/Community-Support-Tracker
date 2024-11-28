@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Signup</title>
+    <link rel="stylesheet" href="../Shared/styles.css">
+</head>
+<body>
+  <!-- Shared Header -->
+  <header>
+    <!-- Include shared header component -->
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <!-- Include shared navigation component -->
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <h1>Event Signup</h1>
+    <form id="eventSignupForm">
+      <label for="eventName">Event Name:</label>
+      <input type="text" id="eventName" name="eventName" required>
+      
+      <label for="representativeName">Company Representative's Name:</label>
+      <input type="text" id="representativeName" name="representativeName" required>
+      
+      <label for="representativeEmail">Representative's Email:</label>
+      <input type="email" id="representativeEmail" name="representativeEmail" required>
+      
+      <label for="role">Role Selection:</label>
+      <select id="role" name="role" required>
+        <option value="" disabled selected>Select a role</option>
+        <option value="sponsor">Sponsor</option>
+        <option value="participant">Participant</option>
+        <option value="organizer">Organizer</option>
+      </select>
+      
+      <button type="submit">Sign Up</button>
+    </form>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer>
+    <!-- Include shared footer component -->
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
