@@ -12,8 +12,8 @@ function loadSharedComponents() {
         <nav>
             <ul>
                 <li><a href="../Student_1/donation_tracker.html">Donation Tracker</a></li>
-                <li><a href="../Student_2/volunteer_tracker.html">Volunteer Tracker</a></li>
-                <li><a href="../Student_3/event_signup.html">Event Signup</a></li>
+                <li><a href="../Student_2/index.html">Volunteer Tracker</a></li>
+                <li><a href="../Student3/index.html">Event Signup</a></li>
             </ul>
         </nav>
     `;
