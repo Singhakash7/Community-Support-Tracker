@@ -10,7 +10,7 @@ Used for hover effects and buttons.
 Background Color: #F9F9F9 (Light Grey)
 Used as the overall page background for better readability.
 Text Color: #333333 (Dark Grey)
-Used for all text content.
+Used for all text content
 # Typography
 Font Family: Arial, sans-serif
 Chosen for its clean and professional look.
