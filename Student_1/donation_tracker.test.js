@@ -34,12 +34,6 @@ describe('Donation Tracker Tests', () => {
     donationAmount = document.getElementById('donationAmount');
     donationDate = document.getElementById('donationDate');
     donorMessage = document.getElementById('donorMessage');
-
-    // Reset form values before each test
-    charityName.value = '';
-    donationAmount.value = '';
-    donationDate.value = '';
-    donorMessage.value = '';
   });
 
   test('should trigger the function on form submission', () => {
