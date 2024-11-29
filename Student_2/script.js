@@ -1,7 +1,3 @@
-// Volunteer Hours Tracker JavaScript
-const { JSDOM } = require('jsdom');
-const { TextEncoder, TextDecoder } = require('util');   // Already imported
-
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("volunteer-form");
     const charityNameInput = document.getElementById("charity-name");
@@ -12,6 +8,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const totalHoursSpan = document.getElementById("total-hours");
 
     let totalHours = 0;
+
+    // Retrieve saved data from localStorage
+    function loadSavedData() {
+        const savedData = JSON.parse(localStorage.getItem("volunteerData")) || [];
+        totalHours = parseFloat(localStorage.getItem("totalHours")) || 0;
+
+        savedData.forEach(({ charityName, hoursVolunteered, date, experienceRating }) => {
+            addTableRow(charityName, hoursVolunteered, date, experienceRating);
+        });
+
+        updateTotalHoursDisplay();
+    }
 
     // Function to add a row to the volunteer table
     function addTableRow(charityName, hoursVolunteered, date, experienceRating) {
@@ -33,13 +41,53 @@ document.addEventListener("DOMContentLoaded", function () {
         experienceCell.textContent = experienceRating;
         row.appendChild(experienceCell);
 
+        // Add a delete button
+        const actionsCell = document.createElement("td");
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.addEventListener("click", function () {
+            deleteRow(row, hoursVolunteered);
+        });
+        actionsCell.appendChild(deleteButton);
+        row.appendChild(actionsCell);
+
         volunteerTable.querySelector("tbody").appendChild(row);
     }
 
     // Function to update the total volunteer hours
     function updateTotalHours(hours) {
         totalHours += hours;
-        totalHoursSpan.textContent = totalHours;
+        updateTotalHoursDisplay();
+        saveData();
+    }
+
+    function updateTotalHoursDisplay() {
+        totalHoursSpan.textContent = `Total Hours Volunteered: ${totalHours}`;
+    }
+
+    // Function to delete a row
+    function deleteRow(row, hours) {
+        row.remove();
+        totalHours -= hours;
+        updateTotalHoursDisplay();
+        saveData();
+    }
+
+    // Function to save data to localStorage
+    function saveData() {
+        const rows = volunteerTable.querySelectorAll("tbody tr");
+        const data = Array.from(rows).map(row => {
+            const cells = row.querySelectorAll("td");
+            return {
+                charityName: cells[0].textContent,
+                hoursVolunteered: parseFloat(cells[1].textContent),
+                date: cells[2].textContent,
+                experienceRating: parseInt(cells[3].textContent, 10)
+            };
+        });
+
+        localStorage.setItem("volunteerData", JSON.stringify(data));
+        localStorage.setItem("totalHours", totalHours.toString());
     }
 
     // Function to validate input data
@@ -74,4 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
             form.reset();
         }
     });
+
+    // Load data on page load
+    loadSavedData();
 });
