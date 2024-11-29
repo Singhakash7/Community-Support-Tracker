@@ -1,5 +1,5 @@
-document.getElementById('donationForm').addEventListener('submit', function (e) {
-    e.preventDefault(); // Prevent the form from refreshing the page
+function handleDonationFormSubmission(event) {
+    event.preventDefault(); 
 
     // Collect form values
     const charityName = document.getElementById('charityName').value.trim();
@@ -24,4 +24,10 @@ document.getElementById('donationForm').addEventListener('submit', function (e) 
     // Log the temporary data object
     console.log('Donation Data:', donationData);
     alert('Donation successfully added!');
-});
+}
+
+// Attach the function to the form submission event
+document.getElementById('donationForm').addEventListener('submit', handleDonationFormSubmission);
+
+// Export the function for testing
+module.exports = handleDonationFormSubmission;
