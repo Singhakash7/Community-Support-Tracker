@@ -43,12 +43,12 @@ describe('Donation Tracker Tests', () => {
   });
 
   test('should trigger the function on form submission', () => {
-    const mockSubmitHandler = jest.fn(); // Mock function for form submission
-    form.addEventListener('submit', mockSubmitHandler); // Add the mock function as a submit handler
+    const mockSubmitHandler = jest.fn(); 
+    form.addEventListener('submit', mockSubmitHandler); 
 
-    form.dispatchEvent(new Event('submit')); // Simulate form submission
+    form.dispatchEvent(new Event('submit')); 
 
-    expect(mockSubmitHandler).toHaveBeenCalled(); // Check if the mock function was called
+    expect(mockSubmitHandler).toHaveBeenCalled(); 
   });
 
   test('should validate required fields are filled', () => {
@@ -63,7 +63,7 @@ describe('Donation Tracker Tests', () => {
 
   test('should not allow invalid donation amount', () => {
     charityName.value = 'Charity A';
-    donationAmount.value = '-10'; // Invalid donation amount
+    donationAmount.value = '-10'; 
     donationDate.value = '2024-12-01';
 
     // Simulate form submission
