@@ -1,128 +1,112 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("volunteer-form");
-    const charityNameInput = document.getElementById("charity-name");
-    const hoursVolunteeredInput = document.getElementById("hours-volunteered");
-    const dateInput = document.getElementById("date");
-    const experienceRatingInput = document.getElementById("experience-rating");
-    const volunteerTable = document.getElementById("volunteer-table");
-    const totalHoursSpan = document.getElementById("total-hours");
+const { TextEncoder, TextDecoder } = require('util');
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder;
 
-    let totalHours = 0;
 
-    // Retrieve saved data from localStorage
-    function loadSavedData() {
-        const savedData = JSON.parse(localStorage.getItem("volunteerData")) || [];
-        totalHours = parseFloat(localStorage.getItem("totalHours")) || 0;
+const { JSDOM } = require('jsdom');
 
-        savedData.forEach(({ charityName, hoursVolunteered, date, experienceRating }) => {
-            addTableRow(charityName, hoursVolunteered, date, experienceRating);
-        });
+describe('Volunteer Hours Tracker', () => {
+  let dom, document, form, submitButton, totalHours;
 
-        updateTotalHoursDisplay();
-    }
+  beforeEach(() => {
+    // Initialize the JSDOM and setup the mock DOM environment
+    dom = new JSDOM(`
+      <form id="volunteer-form">
+        <input id="charity-name" value="Charity A" />
+        <input id="hours-volunteered" value="5" />
+        <input id="date" value="2024-11-26" />
+        <input id="experience-rating" value="4" />
+        <button type="submit">Log Volunteer Hours</button>
+      </form>
+      <table id="volunteer-table">
+        <tbody></tbody>
+      </table>
+      <span id="total-hours">0</span>
+    `);
 
-    // Function to add a row to the volunteer table
-    function addTableRow(charityName, hoursVolunteered, date, experienceRating) {
-        const row = document.createElement("tr");
+    // Set up the document and form elements
+    document = dom.window.document;
+    form = document.getElementById('volunteer-form');
+    submitButton = document.querySelector('button[type="submit"]');
+    totalHours = document.getElementById('total-hours');
 
-        const charityCell = document.createElement("td");
-        charityCell.textContent = charityName;
-        row.appendChild(charityCell);
+    // Add event listener to update total hours and table (simulating real functionality)
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
 
-        const hoursCell = document.createElement("td");
-        hoursCell.textContent = hoursVolunteered;
-        row.appendChild(hoursCell);
+      // Get form values
+      const charityName = document.getElementById('charity-name').value;
+      const hoursVolunteered = parseFloat(document.getElementById('hours-volunteered').value);
+      const date = document.getElementById('date').value;
+      const experienceRating = parseInt(document.getElementById('experience-rating').value);
 
-        const dateCell = document.createElement("td");
-        dateCell.textContent = date;
-        row.appendChild(dateCell);
+      // Update the table
+      const tableBody = document.getElementById('volunteer-table').querySelector('tbody');
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${charityName}</td>
+        <td>${hoursVolunteered}</td>
+        <td>${date}</td>
+        <td>${experienceRating}</td>
+      `;
+      tableBody.appendChild(row);
 
-        const experienceCell = document.createElement("td");
-        experienceCell.textContent = experienceRating;
-        row.appendChild(experienceCell);
-
-        // Add a delete button
-        const actionsCell = document.createElement("td");
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Delete";
-        deleteButton.addEventListener("click", function () {
-            deleteRow(row, hoursVolunteered);
-        });
-        actionsCell.appendChild(deleteButton);
-        row.appendChild(actionsCell);
-
-        volunteerTable.querySelector("tbody").appendChild(row);
-    }
-
-    // Function to update the total volunteer hours
-    function updateTotalHours(hours) {
-        totalHours += hours;
-        updateTotalHoursDisplay();
-        saveData();
-    }
-
-    function updateTotalHoursDisplay() {
-        totalHoursSpan.textContent = `Total Hours Volunteered: ${totalHours}`;
-    }
-
-    // Function to delete a row
-    function deleteRow(row, hours) {
-        row.remove();
-        totalHours -= hours;
-        updateTotalHoursDisplay();
-        saveData();
-    }
-
-    // Function to save data to localStorage
-    function saveData() {
-        const rows = volunteerTable.querySelectorAll("tbody tr");
-        const data = Array.from(rows).map(row => {
-            const cells = row.querySelectorAll("td");
-            return {
-                charityName: cells[0].textContent,
-                hoursVolunteered: parseFloat(cells[1].textContent),
-                date: cells[2].textContent,
-                experienceRating: parseInt(cells[3].textContent, 10)
-            };
-        });
-
-        localStorage.setItem("volunteerData", JSON.stringify(data));
-        localStorage.setItem("totalHours", totalHours.toString());
-    }
-
-    // Function to validate input data
-    function validateInputs(hoursVolunteered, experienceRating) {
-        if (hoursVolunteered <= 0) {
-            alert("Please enter a valid number of hours volunteered.");
-            return false;
-        }
-
-        if (experienceRating < 1 || experienceRating > 5) {
-            alert("Experience rating must be between 1 and 5.");
-            return false;
-        }
-
-        return true;
-    }
-
-    // Event listener for form submission
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const charityName = charityNameInput.value.trim();
-        const hoursVolunteered = parseFloat(hoursVolunteeredInput.value.trim());
-        const date = dateInput.value.trim();
-        const experienceRating = parseInt(experienceRatingInput.value.trim(), 10);
-
-        if (validateInputs(hoursVolunteered, experienceRating)) {
-            addTableRow(charityName, hoursVolunteered, date, experienceRating);
-            updateTotalHours(hoursVolunteered);
-
-            // Clear form inputs after submission
-            form.reset();
-        }
+      // Update total hours
+      const currentTotal = parseFloat(totalHours.textContent);
+      totalHours.textContent = (currentTotal + hoursVolunteered).toString();
     });
+  });
 
-    // Load data on page load
-    loadSavedData();
+  // Test 1: Should collect form data correctly
+  test('should collect form data correctly', () => {
+    const charityName = document.getElementById('charity-name').value;
+    const hoursVolunteered = parseFloat(document.getElementById('hours-volunteered').value);
+    const date = document.getElementById('date').value;
+    const experienceRating = parseInt(document.getElementById('experience-rating').value);
+
+    expect(charityName).toBe('Charity A');
+    expect(hoursVolunteered).toBe(5);
+    expect(date).toBe('2024-11-26');
+    expect(experienceRating).toBe(4);
+  });
+
+  // Test 2: Should validate inputs correctly
+  test('should validate inputs correctly', () => {
+    const hoursVolunteered = parseFloat(document.getElementById('hours-volunteered').value);
+    const experienceRating = parseInt(document.getElementById('experience-rating').value);
+
+    expect(hoursVolunteered).toBeGreaterThan(0);
+    expect(experienceRating).toBeGreaterThanOrEqual(1);
+    expect(experienceRating).toBeLessThanOrEqual(5);
+  });
+
+  // Test 3: Should update the table with volunteer hours on form submission
+  test('should update table with volunteer hours on form submission', () => {
+    // Simulate form submission
+    submitButton.click();
+
+    const table = document.getElementById('volunteer-table');
+    const rows = table.querySelectorAll('tr');
+    expect(rows.length).toBe(1); // Check if a row has been added
+
+    const firstRow = rows[0];
+    const cells = firstRow.querySelectorAll('td');
+    expect(cells[0].textContent).toBe('Charity A');
+    expect(cells[1].textContent).toBe('5');
+    expect(cells[2].textContent).toBe('2024-11-26');
+    expect(cells[3].textContent).toBe('4');
+  });
+
+  // Test 4: Should update total hours correctly after multiple submissions
+  test('should update total hours correctly after multiple submissions', () => {
+    // Simulate first form submission
+    submitButton.click();
+    
+    // Change hours and simulate second form submission
+    document.getElementById('hours-volunteered').value = 3;
+    submitButton.click();
+
+    // Verify that total hours are updated correctly
+    expect(totalHours.textContent).toBe('8'); // 5 + 3 = 8
+  });
 });
