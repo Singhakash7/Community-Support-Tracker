@@ -1,61 +1,89 @@
-// Mock the DOM elements
+// Mock the DOM
 document.body.innerHTML = `
   <form id="donationForm">
     <input type="text" id="charityName" />
     <input type="number" id="donationAmount" />
     <input type="date" id="donationDate" />
     <textarea id="donorMessage"></textarea>
-    <button type="submit"></button>
+    <button type="submit">Add Donation</button>
   </form>
 `;
 
 const handleDonationFormSubmission = require('./donation_tracker');
 
-test('function is triggered on form submission', () => {
-  const donationForm = document.getElementById('donationForm');
-  const submitSpy = jest.spyOn(donationForm, 'addEventListener');
+describe('Donation Tracker Tests', () => {
+  let form, charityName, donationAmount, donationDate, donorMessage;
 
-  // Attach the event listener
-  donationForm.addEventListener('submit', handleDonationFormSubmission);
+  beforeEach(() => {
+    form = document.getElementById('donationForm');
+    charityName = document.getElementById('charityName');
+    donationAmount = document.getElementById('donationAmount');
+    donationDate = document.getElementById('donationDate');
+    donorMessage = document.getElementById('donorMessage');
+  });
 
-  expect(submitSpy).toHaveBeenCalledWith('submit', expect.any(Function));
-});
+  test('function is triggered on form submission', () => {
+    const submitSpy = jest.spyOn(form, 'addEventListener');
+    form.addEventListener('submit', handleDonationFormSubmission);
+    expect(submitSpy).toHaveBeenCalledWith('submit', expect.any(Function));
+  });
 
-test('validates required fields', () => {
-  document.getElementById('charityName').value = '';
-  document.getElementById('donationAmount').value = '';
-  document.getElementById('donationDate').value = '';
+  test('validates required fields', () => {
+    // Simulate empty fields and form submission
+    form.dispatchEvent(new Event('submit'));
+    // Expect some indication of error in the DOM
+    const errorMessage = document.querySelector('#error-message');
+    expect(errorMessage.textContent).toBe('Please fill in all required fields correctly.');
+  });
 
-  const alertSpy = jest.spyOn(window, 'alert').mockImplementation(() => {});
-  document.getElementById('donationForm').dispatchEvent(new Event('submit'));
+  test('validates donation amount', () => {
+    // Set invalid donation amount
+    charityName.value = 'Test Charity';
+    donationAmount.value = '-10'; // Invalid amount
+    donationDate.value = '2024-12-01';
 
-  expect(alertSpy).toHaveBeenCalledWith('Please fill in all required fields correctly.');
-});
+    form.dispatchEvent(new Event('submit'));
+    const errorMessage = document.querySelector('#error-message');
+    expect(errorMessage.textContent).toBe('Please fill in all required fields correctly.');
+  });
 
-test('validates donation amount', () => {
-  document.getElementById('charityName').value = 'Test Charity';
-  document.getElementById('donationAmount').value = '-10'; // Invalid amount
-  document.getElementById('donationDate').value = '2024-12-01';
+  test('correctly collects form data', () => {
+    // Fill in valid data
+    charityName.value = 'Test Charity';
+    donationAmount.value = '100';
+    donationDate.value = '2024-12-01';
+    donorMessage.value = 'Great cause!';
 
-  const alertSpy = jest.spyOn(window, 'alert').mockImplementation(() => {});
-  document.getElementById('donationForm').dispatchEvent(new Event('submit'));
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+    form.dispatchEvent(new Event('submit'));
 
-  expect(alertSpy).toHaveBeenCalledWith('Please fill in all required fields correctly.');
-});
+    expect(consoleSpy).toHaveBeenCalledWith('Donation Data:', {
+      charityName: 'Test Charity',
+      donationAmount: 100,
+      donationDate: '2024-12-01',
+      donorMessage: 'Great cause!',
+    });
 
-test('correctly populates donation data object', () => {
-  document.getElementById('charityName').value = 'Test Charity';
-  document.getElementById('donationAmount').value = '100';
-  document.getElementById('donationDate').value = '2024-12-01';
-  document.getElementById('donorMessage').value = 'Great cause!';
+    consoleSpy.mockRestore();
+  });
 
-  const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
-  document.getElementById('donationForm').dispatchEvent(new Event('submit'));
+  test('temporary data object is correctly populated', () => {
+    // Fill in valid data
+    charityName.value = 'Test Charity';
+    donationAmount.value = '100';
+    donationDate.value = '2024-12-01';
+    donorMessage.value = 'Great cause!';
 
-  expect(consoleSpy).toHaveBeenCalledWith('Donation Data:', {
-    charityName: 'Test Charity',
-    donationAmount: 100,
-    donationDate: '2024-12-01',
-    donorMessage: 'Great cause!',
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+    form.dispatchEvent(new Event('submit'));
+
+    expect(consoleSpy).toHaveBeenCalledWith('Donation Data:', {
+      charityName: 'Test Charity',
+      donationAmount: 100,
+      donationDate: '2024-12-01',
+      donorMessage: 'Great cause!',
+    });
+
+    consoleSpy.mockRestore();
   });
 });
