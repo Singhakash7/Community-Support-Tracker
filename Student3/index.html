@@ -11,35 +11,54 @@
     <div id="header"></div>
     <div id="navbar"></div>
 
-  <!-- Main Content -->
-  <main>
-    <h1>Event Signup</h1>
-    <form id="eventSignupForm">
-      <label for="eventName">Event Name:</label>
-      <input type="text" id="eventName" name="eventName" required>
-      
-      <label for="representativeName">Company Representative's Name:</label>
-      <input type="text" id="representativeName" name="representativeName" required>
-      
-      <label for="representativeEmail">Representative's Email:</label>
-      <input type="email" id="representativeEmail" name="representativeEmail" required>
-      
-      <label for="role">Role Selection:</label>
-      <select id="role" name="role" required>
-        <option value="" disabled selected>Select a role</option>
-        <option value="sponsor">Sponsor</option>
-        <option value="participant">Participant</option>
-        <option value="organizer">Organizer</option>
-      </select>
-      
-      <button type="submit">Sign Up</button>
-    </form>
-  </main>
+    <!-- Main Content -->
+    <main>
+        <h1>Event Signup</h1>
+        <form id="eventSignupForm">
+            <label for="eventName">Event Name:</label>
+            <input type="text" id="eventName" name="eventName" required>
+            
+            <label for="representativeName">Company Representative's Name:</label>
+            <input type="text" id="representativeName" name="representativeName" required>
+            
+            <label for="representativeEmail">Representative's Email:</label>
+            <input type="email" id="representativeEmail" name="representativeEmail" required>
+            
+            <label for="role">Role Selection:</label>
+            <select id="role" name="role" required>
+                <option value="" disabled selected>Select a role</option>
+                <option value="sponsor">Sponsor</option>
+                <option value="participant">Participant</option>
+                <option value="organizer">Organizer</option>
+            </select>
+            
+            <button type="submit">Sign Up</button>
+        </form>
 
-  <!-- Shared Components -->
-  <div id="footer"></div>
+        <!-- Signups Table -->
+        <h2>All Signups</h2>
+        <table id="signupsTable" border="1">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Participant's Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
 
-  <script src="script.js"></script>
-  <script src="../Shared/shared.js"></script>
+        <!-- Summary Section -->
+        <h2>Upcoming Events Summary</h2>
+        <ul id="roleSummary"></ul>
+    </main>
+
+    <!-- Shared Components -->
+    <div id="footer"></div>
+
+    <script src="script.js"></script>
+    <script src="../Shared/shared.js"></script>
 </body>
 </html>
