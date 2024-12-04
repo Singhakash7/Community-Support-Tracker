@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="27" failures="0" errors="0" time="6.141">
-  <testsuite name="Donation Tracker Tests" errors="0" failures="0" skipped="0" timestamp="2024-12-04T18:11:16" time="1.694" tests="9">
-    <testcase classname="Donation Tracker Tests function is triggered on form submission" name="Donation Tracker Tests function is triggered on form submission" time="0.023">
+<testsuites name="jest tests" tests="27" failures="0" errors="0" time="2.527">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2024-12-04T18:23:29" time="0.657" tests="9">
+    <testcase classname=" function is triggered on form submission" name=" function is triggered on form submission" time="0.015">
     </testcase>
-    <testcase classname="Donation Tracker Tests validates required fields" name="Donation Tracker Tests validates required fields" time="0.005">
+    <testcase classname=" validates required fields" name=" validates required fields" time="0.003">
     </testcase>
-    <testcase classname="Donation Tracker Tests validates donation amount" name="Donation Tracker Tests validates donation amount" time="0.004">
+    <testcase classname=" validates email format" name=" validates email format" time="0.001">
     </testcase>
-    <testcase classname="Donation Tracker Tests correctly collects form data" name="Donation Tracker Tests correctly collects form data" time="0.008">
+    <testcase classname=" correctly populates form data object" name=" correctly populates form data object" time="0.008">
+    </testcase>
+    <testcase classname=" data is correctly stored in localStorage" name=" data is correctly stored in localStorage" time="0.001">
+    </testcase>
+    <testcase classname=" data is correctly retrieved from localStorage and loaded into the table" name=" data is correctly retrieved from localStorage and loaded into the table" time="0.004">
+    </testcase>
+    <testcase classname=" upcoming events summary displays signups by role" name=" upcoming events summary displays signups by role" time="0.001">
+    </testcase>
+    <testcase classname=" delete button removes a record from the table" name=" delete button removes a record from the table" time="0.004">
+    </testcase>
+    <testcase classname=" delete button removes a record from localStorage" name=" delete button removes a record from localStorage" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="Donation Tracker Tests" errors="0" failures="0" skipped="0" timestamp="2024-12-04T18:23:29" time="0.691" tests="9">
+    <testcase classname="Donation Tracker Tests function is triggered on form submission" name="Donation Tracker Tests function is triggered on form submission" time="0.024">
+    </testcase>
+    <testcase classname="Donation Tracker Tests validates required fields" name="Donation Tracker Tests validates required fields" time="0.004">
+    </testcase>
+    <testcase classname="Donation Tracker Tests validates donation amount" name="Donation Tracker Tests validates donation amount" time="0.003">
+    </testcase>
+    <testcase classname="Donation Tracker Tests correctly collects form data" name="Donation Tracker Tests correctly collects form data" time="0.007">
     </testcase>
     <testcase classname="Donation Tracker Tests data is stored in localStorage" name="Donation Tracker Tests data is stored in localStorage" time="0.002">
     </testcase>
-    <testcase classname="Donation Tracker Tests retrieves data from localStorage and populates table" name="Donation Tracker Tests retrieves data from localStorage and populates table" time="0.007">
+    <testcase classname="Donation Tracker Tests retrieves data from localStorage and populates table" name="Donation Tracker Tests retrieves data from localStorage and populates table" time="0.004">
     </testcase>
-    <testcase classname="Donation Tracker Tests updates total donations in the summary section" name="Donation Tracker Tests updates total donations in the summary section" time="0.002">
+    <testcase classname="Donation Tracker Tests updates total donations in the summary section" name="Donation Tracker Tests updates total donations in the summary section" time="0.001">
     </testcase>
-    <testcase classname="Donation Tracker Tests deletes a donation record from the table and localStorage" name="Donation Tracker Tests deletes a donation record from the table and localStorage" time="0.008">
+    <testcase classname="Donation Tracker Tests deletes a donation record from the table and localStorage" name="Donation Tracker Tests deletes a donation record from the table and localStorage" time="0.004">
     </testcase>
-    <testcase classname="Donation Tracker Tests summary updates correctly after deletion" name="Donation Tracker Tests summary updates correctly after deletion" time="0.009">
-    </testcase>
-  </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2024-12-04T18:11:16" time="1.731" tests="9">
-    <testcase classname=" function is triggered on form submission" name=" function is triggered on form submission" time="0.035">
-    </testcase>
-    <testcase classname=" validates required fields" name=" validates required fields" time="0.008">
-    </testcase>
-    <testcase classname=" validates email format" name=" validates email format" time="0.005">
-    </testcase>
-    <testcase classname=" correctly populates form data object" name=" correctly populates form data object" time="0.019">
-    </testcase>
-    <testcase classname=" data is correctly stored in localStorage" name=" data is correctly stored in localStorage" time="0.004">
-    </testcase>
-    <testcase classname=" data is correctly retrieved from localStorage and loaded into the table" name=" data is correctly retrieved from localStorage and loaded into the table" time="0.007">
-    </testcase>
-    <testcase classname=" upcoming events summary displays signups by role" name=" upcoming events summary displays signups by role" time="0.002">
-    </testcase>
-    <testcase classname=" delete button removes a record from the table" name=" delete button removes a record from the table" time="0.009">
-    </testcase>
-    <testcase classname=" delete button removes a record from localStorage" name=" delete button removes a record from localStorage" time="0.005">
+    <testcase classname="Donation Tracker Tests summary updates correctly after deletion" name="Donation Tracker Tests summary updates correctly after deletion" time="0.006">
     </testcase>
   </testsuite>
-  <testsuite name="Volunteer Hours Tracker" errors="0" failures="0" skipped="0" timestamp="2024-12-04T18:11:16" time="2.816" tests="9">
-    <testcase classname="Volunteer Hours Tracker should collect form data correctly" name="Volunteer Hours Tracker should collect form data correctly" time="0.097">
+  <testsuite name="Volunteer Hours Tracker" errors="0" failures="0" skipped="0" timestamp="2024-12-04T18:23:29" time="1.288" tests="9">
+    <testcase classname="Volunteer Hours Tracker should collect form data correctly" name="Volunteer Hours Tracker should collect form data correctly" time="0.047">
     </testcase>
-    <testcase classname="Volunteer Hours Tracker should validate inputs correctly" name="Volunteer Hours Tracker should validate inputs correctly" time="0.01">
+    <testcase classname="Volunteer Hours Tracker should validate inputs correctly" name="Volunteer Hours Tracker should validate inputs correctly" time="0.007">
     </testcase>
     <testcase classname="Volunteer Hours Tracker should update table with volunteer hours on form submission" name="Volunteer Hours Tracker should update table with volunteer hours on form submission" time="0.015">
     </testcase>
-    <testcase classname="Volunteer Hours Tracker should update total hours correctly after multiple submissions" name="Volunteer Hours Tracker should update total hours correctly after multiple submissions" time="0.012">
+    <testcase classname="Volunteer Hours Tracker should update total hours correctly after multiple submissions" name="Volunteer Hours Tracker should update total hours correctly after multiple submissions" time="0.019">
     </testcase>
-    <testcase classname="Volunteer Hours Tracker should handle deletion of table row and update total" name="Volunteer Hours Tracker should handle deletion of table row and update total" time="0.011">
+    <testcase classname="Volunteer Hours Tracker should handle deletion of table row and update total" name="Volunteer Hours Tracker should handle deletion of table row and update total" time="0.008">
     </testcase>
-    <testcase classname="Volunteer Hours Tracker should flag missing required fields" name="Volunteer Hours Tracker should flag missing required fields" time="0.012">
+    <testcase classname="Volunteer Hours Tracker should flag missing required fields" name="Volunteer Hours Tracker should flag missing required fields" time="0.005">
     </testcase>
-    <testcase classname="Volunteer Hours Tracker should flag invalid hours volunteered" name="Volunteer Hours Tracker should flag invalid hours volunteered" time="0.013">
+    <testcase classname="Volunteer Hours Tracker should flag invalid hours volunteered" name="Volunteer Hours Tracker should flag invalid hours volunteered" time="0.005">
     </testcase>
-    <testcase classname="Volunteer Hours Tracker should flag invalid experience rating" name="Volunteer Hours Tracker should flag invalid experience rating" time="0.01">
+    <testcase classname="Volunteer Hours Tracker should flag invalid experience rating" name="Volunteer Hours Tracker should flag invalid experience rating" time="0.005">
     </testcase>
-    <testcase classname="Volunteer Hours Tracker should load data from localStorage into the table" name="Volunteer Hours Tracker should load data from localStorage into the table" time="0.02">
+    <testcase classname="Volunteer Hours Tracker should load data from localStorage into the table" name="Volunteer Hours Tracker should load data from localStorage into the table" time="0.008">
     </testcase>
   </testsuite>
 </testsuites>
