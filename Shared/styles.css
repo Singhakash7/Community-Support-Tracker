@@ -21,8 +21,10 @@ header {
 nav {
     background-color: #004D40;
     display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: relative;
 }
 
 nav ul {
@@ -49,6 +51,36 @@ nav ul li a:hover {
     background-color: #26A69A;
 }
 
+/* Mobile Dropdown Menu */
+.nav-toggle {
+    display: none;
+    font-size: 24px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        background-color: #004D40;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+}
+
 /* Footer Styles */
 footer {
     background-color: #00695C;
@@ -64,15 +96,52 @@ footer {
 /* Main Content */
 main {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-section {
+form {
     background-color: #FFFFFF;
     padding: 20px;
-    margin: 20px 0;
     border: 1px solid #26A69A;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input,
+form textarea,
+form button {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+form button {
+    background-color: #004D40;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #26A69A;
 }
 
 /* Responsive Styles */
@@ -82,7 +151,7 @@ section {
         align-items: center;
     }
 
-    section {
-        margin: 10px 0;
+    form {
+        margin: 0 20px;
     }
 }
