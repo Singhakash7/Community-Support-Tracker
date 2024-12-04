@@ -4,62 +4,65 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Volunteer Hours Tracker</title>
-  <link rel="stylesheet" href="../Shared/styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Shared Components -->
-    <div id="header"></div>
-    <div id="navbar"></div>
+  <!-- Shared Components -->
+  <header>
+    <h1>Volunteer Hours Tracker</h1>
+  </header>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Tracker</a>
+    <a href="#">About</a>
+  </nav>
 
   <!-- Main Content -->
   <main>
-    <h2>Volunteer Hours Tracker</h2>
+    <section id="form-section">
+      <h2>Log Volunteer Hours</h2>
+      <form id="volunteer-form">
+        <label for="charity-name">Charity Name:</label>
+        <input type="text" id="charity-name" name="charity-name" required>
 
-    <!-- Form Section -->
-    <form id="volunteer-form">
-      <label for="charity-name">Charity Name:</label>
-      <input type="text" id="charity-name" name="charityName" placeholder="Enter charity name" required>
+        <label for="hours-volunteered">Hours Volunteered:</label>
+        <input type="number" id="hours-volunteered" name="hours-volunteered" min="0" required>
 
-      <label for="hours-volunteered">Hours Volunteered:</label>
-      <input type="number" id="hours-volunteered" name="hoursVolunteered" placeholder="Enter hours volunteered" required>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
 
-      <label for="date">Date:</label>
-      <input type="date" id="date" name="date" required>
+        <label for="experience-rating">Volunteer Experience Rating (1-5):</label>
+        <input type="number" id="experience-rating" name="experience-rating" min="1" max="5" required>
 
-      <label for="experience-rating">Volunteer Experience Rating (1-5):</label>
-      <input type="number" id="experience-rating" name="experienceRating" min="1" max="5" placeholder="Rate your experience (1-5)" required>
+        <button type="submit">Log Hours</button>
+      </form>
+    </section>
 
-      <button type="submit">Log Hours</button>
-    </form>
-
-    <!-- Table Section -->
-    <h3>Logged Hours</h3>
-    <table id="volunteer-table">
-      <thead>
-        <tr>
-          <th>Charity Name</th>
-          <th>Hours Volunteered</th>
-          <th>Date</th>
-          <th>Experience Rating</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Rows will be added dynamically -->
-      </tbody>
-    </table>
-
-    <!-- Summary Section -->
-    <p id="total-hours">Total Hours Volunteered: 0</p>
+    <section id="table-section">
+      <h2>Logged Hours</h2>
+      <table id="volunteer-table">
+        <thead>
+          <tr>
+            <th>Charity Name</th>
+            <th>Hours Volunteered</th>
+            <th>Date</th>
+            <th>Experience Rating</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div id="summary">
+        <h3>Total Hours Volunteered: <span id="total-hours">0</span></h3>
+      </div>
+    </section>
   </main>
 
-  <!-- Footer Section -->
+  <!-- Shared Components -->
   <footer>
-    <p>&copy; 2024 Community Support Tracker</p>
+    <p>Volunteer Hours Tracker &copy; 2024</p>
   </footer>
 
-  <!-- JavaScript File -->
-  <script src="../Shared/shared.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
